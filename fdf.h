@@ -1,64 +1,78 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/06 16:20:14 by baalbane          #+#    #+#             */
-/*   Updated: 2016/07/08 01:46:31 by baalbane         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FDF_H
 # define FDF_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <mlx.h>
 
-# define XMAX 1200
-# define YMAX 1200
+# define BUFF_SIZE	420
+
+# define HEIGHT		1000
+# define WIDTH		1200
+# define PRECISION	20
+
+#define RIGHT		0
+#define DOWN		1
+
+typedef struct		s_list
+{
+	struct	s_value	*configlst;
+	int				xlen;
+	int				ylen;
+	int				**map;
+	int				min;
+	int				max;
+	int				ratioH;
+	int				ratioW;
+}					t_list;
 
 typedef struct		s_value
 {
 	void			*mlx;
 	void			*win;
-	void			*ptrimg;
-	char			*img;
+}					t_value;
 
-	int				bitpxl;
-	int				linebit;
-	int				endian;
-
-	int				ratiox;
-	int				ratioy;
-	int				ratioz;
-}					value;
-
-typedef struct		s_list
+typedef struct		s_print
 {
-	int				x;
-	int				y;
-	int				z;
-	struct s_list	*right;
-	struct s_list	*bot;
-}					t_list;
+	int				x1;
+	int				y1;
+	int				x2;
+	int				y2;
+	int				dx;
+	int				sx;
+	int				dy;
+	int				sy;
+}					t_print;
 
 
+int		getlen(char *new);
+int		**get_new_map(t_list *lst, int len);
+int		fill_map(t_list *lst, char *new);
+int		goread(int fd, t_list *lst);
+t_list	*init_lst(t_value *config);
+int		main(int ac, char **av);
 
-int					putlinexy(void*mlx, void *win, int coord[4]);
-int					putline(void *mlx, void *win, t_list *a, t_list *b);
-int					abs(int x);
+int		is_number(char a);
+int		is_space(char a);
+int		is_empty(char *a);
+char	*ft_strchr(char *s, int c);
+int		ft_strlen(const char *s);
 
-int					initlist(t_list *new, int *x, int *y);
-char				newlist(int *x, int *y, int fd, t_list *new);
-t_list				*goread(int fd, int xy[2], t_list *left, t_list *top);
+int					map_value(t_list *lst);
+int					ft_putstr(char *str);
 
-int					makelink(t_list *top, t_list *bot);
-int					makealllink(t_list *start);
+int					ft_strlenchr(char *buffer, int a);
+int					saveline(char *buffer, char **line, char **buf);
+char				*ft_strjoin2(char *str, char *str2);
+int					addbuff(char **buffer, int const fd, int *ret);
+int					get_next_line(int const fd, char **line);
 
-int					drawallline(void *mlx, void *win, t_list *start);
+int					draw(t_list *lst);
+int 				line(t_print *print, t_list *lst);
+t_print				*makeprintlst(int x, int y, int o, t_list *lst);
 
 #endif
