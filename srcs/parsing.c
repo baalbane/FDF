@@ -38,8 +38,8 @@ int		**get_new_map(t_list *lst, int len)
 	j = -1;
 	if (len == -1 || (lst->xlen != -1 && lst->xlen != len))
 	{
-		printf("ERROR %d %d\n", len, lst->xlen);
-		//freemap(map);
+		//printf("Error map %d %d\n", len, lst->xlen);
+		ft_putstr("Error map\n");
 		return (NULL);
 	}
 	lst->xlen = len;
