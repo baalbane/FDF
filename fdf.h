@@ -26,8 +26,8 @@ typedef struct		s_list
 	int				**map;
 	int				min;
 	int				max;
-	int				ratioH;
-	int				ratioW;
+	double			ratioH;
+	double			ratioW;
 }					t_list;
 
 typedef struct		s_value

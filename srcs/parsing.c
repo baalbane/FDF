@@ -87,6 +87,10 @@ int		fill_map(t_list *lst, char *new)
 			x++;
 		}
 	}
+	if (lst->max == lst->min && lst->min > 0)
+		lst->min--;
+	else if (lst->max == lst->min)
+		lst->max++;
 	return (1);
 }
 

@@ -62,17 +62,17 @@ t_print		*makeprintlst(int x, int y, int dir, t_list *lst)
 	t_print	*print;
 
 	print = malloc(sizeof(t_print));
-	print->x1 = ((x+2) * lst->ratioW) - lst->map[y][x];
-	print->y1 = ((y+2) * lst->ratioH) - lst->map[y][x];
+	print->x1 = ((x+3) * lst->ratioW) - lst->map[y][x];
+	print->y1 = ((y+3) * lst->ratioH) - lst->map[y][x];
 	if (dir == RIGHT)
 	{
-		print->x2 = ((x+3) * lst->ratioW) - lst->map[y][x+1];
-		print->y2 = ((y+2) * lst->ratioH) - lst->map[y][x+1];
+		print->x2 = ((x+4) * lst->ratioW) - lst->map[y][x+1];
+		print->y2 = ((y+3) * lst->ratioH) - lst->map[y][x+1];
 	}
 	else
 	{
-		print->x2 = ((x+2) * lst->ratioW) - lst->map[y+1][x];
-		print->y2 = ((y+3) * lst->ratioH) - lst->map[y+1][x];
+		print->x2 = ((x+3) * lst->ratioW) - lst->map[y+1][x];
+		print->y2 = ((y+4) * lst->ratioH) - lst->map[y+1][x];
 	}
 	return(print);
 }
