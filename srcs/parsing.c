@@ -24,7 +24,7 @@ int		getlen(char *new)
 		}
 		else if (new[i] != '\0')
 			return (-1);
-		if (new[i] == '-' && i != 0 && !is_space(new[i-1]))
+		if (new[i] == '-' && i != 0 && !is_space(new[i - 1]))
 			return (-1);
 	}
 	return (nb);
@@ -38,7 +38,6 @@ int		**get_new_map(t_list *lst, int len)
 	j = -1;
 	if (len == -1 || (lst->xlen != -1 && lst->xlen != len))
 	{
-		//printf("Error map %d %d\n", len, lst->xlen);
 		ft_putstr("Error map\n");
 		return (NULL);
 	}
@@ -77,7 +76,8 @@ int		fill_map(t_list *lst, char *new)
 				neg = 1;
 			}
 			while (is_number(new[j]))
-				lst->map[lst->ylen][x] = lst->map[lst->ylen][x] * 10 + new[j++] - '0';
+				lst->map[lst->ylen][x] = lst->map[lst->ylen][x] * 10
+					+ new[j++] - '0';
 			if (neg == 1)
 				lst->map[lst->ylen][x] = 0 - lst->map[lst->ylen][x];
 			if (lst->map[lst->ylen][x] < lst->min)
@@ -112,7 +112,7 @@ int	goread(int fd, t_list *lst)
 		free(new);
 	}
 	map_value(lst);
-	return(1);
+	return (1);
 }
 
 t_list	*init_lst(t_value *config)

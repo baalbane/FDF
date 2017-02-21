@@ -10,6 +10,8 @@ int		map_value(t_list *lst)
 
 	min = (double)lst->min;
 	max = (double)lst->max;
+	lst->ratiow = (double)WIDTH / (lst->xlen+8);
+	lst->ratioh = (double)HEIGHT / (lst->ylen+8);
 	i = -1;
 	while (lst->map[++i] != NULL)
 	{
@@ -17,12 +19,12 @@ int		map_value(t_list *lst)
 		while (++j < lst->xlen)
 		{
 			nb = (double)lst->map[i][j];
-			nb = (nb + (0 - min)) / (max - min) * PRECISION;
+			nb = (nb + (0 - min)) / (max - min)
+				* ((lst->ratiow + lst->ratioh) / 2);
 			lst->map[i][j] = (int)nb;
 		}
 	}
-	lst->ratioW = WIDTH / (lst->xlen+4);
-	lst->ratioH = HEIGHT / (lst->ylen+4);
+	//printf("%f | %f\n", lst->ratioW, lst->ratioH);
 	return (1);
 }
 

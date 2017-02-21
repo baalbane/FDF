@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/21 16:02:01 by baalbane          #+#    #+#             */
+/*   Updated: 2017/02/21 16:02:05 by baalbane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -10,24 +22,21 @@
 # include <mlx.h>
 
 # define BUFF_SIZE	420
-
 # define HEIGHT		1000
 # define WIDTH		1200
-# define PRECISION	20
-
-#define RIGHT		0
-#define DOWN		1
+# define RIGHT		0
+# define DOWN		1
 
 typedef struct		s_list
 {
-	struct	s_value	*configlst;
+	struct s_value	*configlst;
 	int				xlen;
 	int				ylen;
 	int				**map;
 	int				min;
 	int				max;
-	double			ratioH;
-	double			ratioW;
+	double			ratioh;
+	double			ratiow;
 }					t_list;
 
 typedef struct		s_value
@@ -49,18 +58,18 @@ typedef struct		s_print
 }					t_print;
 
 
-int		getlen(char *new);
-int		**get_new_map(t_list *lst, int len);
-int		fill_map(t_list *lst, char *new);
-int		goread(int fd, t_list *lst);
-t_list	*init_lst(t_value *config);
-int		main(int ac, char **av);
+int					getlen(char *new);
+int					**get_new_map(t_list *lst, int len);
+int					fill_map(t_list *lst, char *new);
+int					goread(int fd, t_list *lst);
+t_list				*init_lst(t_value *config);
+int					main(int ac, char **av);
 
-int		is_number(char a);
-int		is_space(char a);
-int		is_empty(char *a);
-char	*ft_strchr(char *s, int c);
-int		ft_strlen(const char *s);
+int					is_number(char a);
+int					is_space(char a);
+int					is_empty(char *a);
+char				*ft_strchr(char *s, int c);
+int					ft_strlen(const char *s);
 
 int					map_value(t_list *lst);
 int					ft_putstr(char *str);
@@ -72,7 +81,7 @@ int					addbuff(char **buffer, int const fd, int *ret);
 int					get_next_line(int const fd, char **line);
 
 int					draw(t_list *lst);
-int 				line(t_print *print, t_list *lst);
+int					line(t_print *print, t_list *lst);
 t_print				*makeprintlst(int x, int y, int o, t_list *lst);
 
 #endif

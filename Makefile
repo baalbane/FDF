@@ -26,7 +26,6 @@ clean:
 	rm -f $(NAME)
 
 fclean: clean
-	rm -f $(NAME)
 
 re: fclean all
 
