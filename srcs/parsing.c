@@ -1,5 +1,16 @@
-#include "../fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/24 15:55:34 by baalbane          #+#    #+#             */
+/*   Updated: 2017/02/24 16:08:35 by baalbane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../fdf.h"
 
 int		getlen(char *new)
 {
@@ -8,7 +19,6 @@ int		getlen(char *new)
 
 	nb = 0;
 	i = 0;
-
 	while (new[i] != '\0')
 	{
 		if (is_space(new[i]))
@@ -51,11 +61,32 @@ int		**get_new_map(t_list *lst, int len)
 	return (new);
 }
 
+int		take_nb(t_list *lst, int x, int *j, char *new)
+{
+	int		neg;
+
+	neg = 1;
+	if (new[*j] == '-')
+		(*j)++;
+	else
+		neg = 0;
+	lst->map[lst->ylen][x] = 0;
+	while (is_number(new[*j]))
+		lst->map[lst->ylen][x] = lst->map[lst->ylen][x] * 10
+			+ new[(*j)++] - '0';
+	if (neg == 1)
+		lst->map[lst->ylen][x] = 0 - lst->map[lst->ylen][x];
+	if (lst->map[lst->ylen][x] < lst->min)
+		lst->min = lst->map[lst->ylen][x];
+	if (lst->map[lst->ylen][x] > lst->max)
+		lst->max = lst->map[lst->ylen][x];
+	return (1);
+}
+
 int		fill_map(t_list *lst, char *new)
 {
 	int		j;
 	int		x;
-	int		neg;
 
 	j = 0;
 	x = 0;
@@ -67,25 +98,7 @@ int		fill_map(t_list *lst, char *new)
 				;
 		}
 		else if (is_number(new[j]) || new[j] == '-')
-		{
-			lst->map[lst->ylen][x] = 0;
-			neg = -1;
-			if (new[j] == '-')
-			{
-				j++;
-				neg = 1;
-			}
-			while (is_number(new[j]))
-				lst->map[lst->ylen][x] = lst->map[lst->ylen][x] * 10
-					+ new[j++] - '0';
-			if (neg == 1)
-				lst->map[lst->ylen][x] = 0 - lst->map[lst->ylen][x];
-			if (lst->map[lst->ylen][x] < lst->min)
-				lst->min = lst->map[lst->ylen][x];
-			if (lst->map[lst->ylen][x] > lst->max)
-				lst->max = lst->map[lst->ylen][x];
-			x++;
-		}
+			take_nb(lst, x++, &j, new);
 	}
 	if (lst->max == lst->min && lst->min > 0)
 		lst->min--;
@@ -94,8 +107,7 @@ int		fill_map(t_list *lst, char *new)
 	return (1);
 }
 
-
-int	goread(int fd, t_list *lst)
+int		goread(int fd, t_list *lst)
 {
 	char	*new;
 
@@ -114,43 +126,3 @@ int	goread(int fd, t_list *lst)
 	map_value(lst);
 	return (1);
 }
-
-t_list	*init_lst(t_value *config)
-{
-	t_list *new;
-
-	new = malloc(sizeof(t_list));
-	new->xlen = -1;
-	new->ylen = 0;
-	new->map = malloc(sizeof(int*) * 1);
-	new->map[0] = NULL;
-	new->min = INT_MAX;
-	new->max = INT_MIN;
-	new->configlst = config;
-	return (new);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

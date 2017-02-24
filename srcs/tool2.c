@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tool2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/24 16:09:46 by baalbane          #+#    #+#             */
+/*   Updated: 2017/02/24 16:09:48 by baalbane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
 int		map_value(t_list *lst)
@@ -10,8 +22,8 @@ int		map_value(t_list *lst)
 
 	min = (double)lst->min;
 	max = (double)lst->max;
-	lst->ratiow = (double)WIDTH / (lst->xlen+8);
-	lst->ratioh = (double)HEIGHT / (lst->ylen+8);
+	lst->ratiow = (double)WIDTH / (lst->xlen + 8);
+	lst->ratioh = (double)HEIGHT / (lst->ylen + 8);
 	i = -1;
 	while (lst->map[++i] != NULL)
 	{
@@ -24,13 +36,12 @@ int		map_value(t_list *lst)
 			lst->map[i][j] = (int)nb;
 		}
 	}
-	//printf("%f | %f\n", lst->ratioW, lst->ratioH);
 	return (1);
 }
 
 int		ft_putstr(char *str)
 {
-	while(*str)
+	while (*str)
 		write(1, &*str++, 1);
-	return(1);
+	return (1);
 }

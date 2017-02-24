@@ -6,11 +6,26 @@
 /*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 16:40:44 by baalbane          #+#    #+#             */
-/*   Updated: 2017/02/21 16:12:47 by baalbane         ###   ########.fr       */
+/*   Updated: 2017/02/24 16:08:37 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+
+t_list	*init_lst(t_value *config)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	new->xlen = -1;
+	new->ylen = 0;
+	new->map = malloc(sizeof(int*) * 1);
+	new->map[0] = NULL;
+	new->min = INT_MAX;
+	new->max = INT_MIN;
+	new->configlst = config;
+	return (new);
+}
 
 int		key_hook(int keycode)
 {

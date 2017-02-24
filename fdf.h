@@ -6,7 +6,7 @@
 /*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:02:01 by baalbane          #+#    #+#             */
-/*   Updated: 2017/02/21 16:02:05 by baalbane         ###   ########.fr       */
+/*   Updated: 2017/02/24 16:08:25 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ typedef struct		s_print
 	int				sy;
 }					t_print;
 
-
 int					getlen(char *new);
 int					**get_new_map(t_list *lst, int len);
+int					take_nb(t_list *lst, int x, int *j, char *new);
 int					fill_map(t_list *lst, char *new);
 int					goread(int fd, t_list *lst);
+
 t_list				*init_lst(t_value *config);
+int					key_hook(int keycode);
 int					main(int ac, char **av);
 
 int					is_number(char a);
